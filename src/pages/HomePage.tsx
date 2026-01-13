@@ -35,6 +35,7 @@ const HomePage: React.FC = () => {
              <img 
                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" 
                alt="Grocery Basket" 
+               onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
                className="relative z-10 w-full max-w-md rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500"
              />
           </div>
@@ -64,6 +65,7 @@ const HomePage: React.FC = () => {
                 <img 
                   src={cat.image} 
                   alt={cat.name} 
+                  onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>

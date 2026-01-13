@@ -29,6 +29,7 @@ const ProductDetailsPage: React.FC = () => {
                <img 
                  src={product.image} 
                  alt={product.title} 
+                 onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
                  className="w-full h-full object-cover"
                />
             </div>
@@ -38,6 +39,7 @@ const ProductDetailsPage: React.FC = () => {
                    <img 
                      src={product.image} 
                      alt="Thumbnail" 
+                     onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                    />
                 </div>

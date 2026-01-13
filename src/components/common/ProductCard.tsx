@@ -34,6 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img 
           src={product.image || "https://placehold.co/400x400?text=No+Image"} 
           alt={product.title}
+          onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
           className="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
         />
         

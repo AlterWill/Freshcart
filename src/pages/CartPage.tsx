@@ -32,7 +32,7 @@ const CartPage: React.FC = () => {
                      <td className="px-6 py-5">
                        <div className="flex items-center space-x-4">
                          <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border border-theme">
-                           <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                           <img src={item.image} alt={item.title} onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }} className="w-full h-full object-cover" />
                          </div>
                          <div>
                            <h4 className="font-bold text-theme-primary">{item.title}</h4>

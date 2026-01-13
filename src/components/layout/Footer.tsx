@@ -65,7 +65,6 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-theme-primary font-bold mb-4">Get In Touch</h4>
             <div className="space-y-4 text-sm text-theme-secondary">
-              <p>5689 Wilson Rd, Beverly Hills, 90210, USA</p>
               <p>support@freshcart.com</p>
               <div className="flex space-x-4 mt-4">
                  {/* Social Placeholders */}
