@@ -94,18 +94,6 @@ const HomePage: React.FC = () => {
       </section>
       
       {/* Promo Banner */}
-      <section className="bg-gray-900 rounded-2xl p-12 relative overflow-hidden text-center md:text-left">
-         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"></div>
-         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">Get 20% Off Your First Order</h2>
-              <p className="text-gray-400 text-lg">Use code <span className="text-white font-mono font-bold bg-green-600 px-2 py-1 rounded">FRESH20</span> at checkout.</p>
-            </div>
-            <Link to="/shop">
-               <Button variant="primary" size="lg" className="bg-white text-green-900 hover:bg-gray-100 border-none">Shop Now</Button>
-            </Link>
-         </div>
-      </section>
     </div>
   );
 };
