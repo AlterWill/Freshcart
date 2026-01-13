@@ -207,8 +207,8 @@ export const FAQS = [
 ];
 
 export const JOBS = [
-  { title: "Senior Frontend Developer", type: "Full-time", dept: "Engineering", loc: "Remote" },
-  { title: "Product Designer", type: "Full-time", dept: "Design", loc: "New York, NY" },
-  { title: "Customer Success Manager", type: "Full-time", dept: "Support", loc: "London, UK" },
-  { title: "Marketing Specialist", type: "Contract", dept: "Marketing", loc: "Remote" },
+  { title: "Senior Frontend Developer", type: "Full-time", dept: "Engineering" },
+  { title: "Product Designer", type: "Full-time", dept: "Design" },
+  { title: "Customer Success Manager", type: "Full-time", dept: "Support" },
+  { title: "Marketing Specialist", type: "Contract", dept: "Marketing" },
 ];

@@ -79,16 +79,6 @@ const Footer: React.FC = () => {
         {/* Bottom: Copyright & Payment */}
           <div className="border-t border-theme mt-12 pt-8 text-center text-sm text-theme-secondary">
             <p>&copy; {new Date().getFullYear()} Freshcart. All rights reserved.</p>
-            <button 
-              onClick={() => {
-                fetch('/api/time')
-                  .then(res => res.json())
-                  .then(data => alert(`Server says:\n${data.message}\nTime: ${data.time}`))
-                                     .catch(() => alert('Failed to fetch API. (This only works on Vercel or with "vercel dev")'));              }}
-              className="mt-2 text-xs text-[var(--brand-primary)] hover:underline"
-            >
-              Test Serverless Function
-            </button>
           </div>
         </div>
     </footer>

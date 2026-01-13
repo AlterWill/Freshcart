@@ -18,8 +18,6 @@ const CareersPage: React.FC = () => {
                <h3 className="text-xl font-bold text-theme-primary group-hover:text-[var(--brand-primary)] transition-colors">{job.title}</h3>
                <div className="text-theme-muted text-sm mt-1 flex items-center justify-center md:justify-start gap-2">
                  <span>{job.dept}</span>
-                 <span>•</span>
-                 <span>{job.loc}</span>
                </div>
              </div>
              <div className="flex items-center gap-4">
