@@ -150,10 +150,10 @@ export const STATS = [
 ];
 
 export const TEAM_MEMBERS = [
-    { id: 1, name: "Rishon K Roshan", role: "CEO & Founder" },
-    { id: 2, name: "Rasya", role: "Head of Engineering" },
-    { id: 3, name: "Joel Dcunha", role: "Product Designer" },
-    { id: 4, name: "John Paul Paret", role: "Marketing Lead" },
+    { id: 1, name: "Rishon K Roshan", role: "CEO & Founder", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" },
+    { id: 2, name: "Rasya", role: "Head of Engineering", image: "https://images.unsplash.com/photo-1573496359-e363d64110b7?auto=format&fit=crop&w=400&q=80" },
+    { id: 3, name: "Joel Dcunha", role: "Product Designer", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" },
+    { id: 4, name: "John Paul Paret", role: "Marketing Lead", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" },
 ];
 
 export const BLOG_POSTS = [
