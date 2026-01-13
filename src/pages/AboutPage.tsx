@@ -49,14 +49,6 @@ const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {TEAM_MEMBERS.map((member) => (
                 <div key={member.id} className="bg-theme-surface rounded-xl overflow-hidden border border-theme hover:shadow-lg transition-shadow">
-                    <div className="h-64 bg-theme-surface-2 flex items-center justify-center text-theme-muted">
-                        <img 
-                           src={member.image} 
-                           alt={member.name} 
-                           onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found" }}
-                           className="w-full h-full object-cover"
-                        />
-                    </div>
                     <div className="p-4 text-center">
                         <h3 className="font-bold text-theme-primary">{member.name}</h3>
                         <p className="text-sm text-[var(--brand-primary)]">{member.role}</p>

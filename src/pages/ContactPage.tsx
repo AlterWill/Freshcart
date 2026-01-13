@@ -31,22 +31,10 @@ const ContactPage: React.FC = () => {
 
         {/* Contact Info */}
         <div className="space-y-8">
-           <div className="bg-theme-surface-2 rounded-3xl h-80 flex items-center justify-center text-theme-muted font-medium border border-theme shadow-inner">
-               Interactive Map Placeholder
-           </div>
-           
            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="p-6 bg-theme-surface border border-theme rounded-2xl shadow-sm">
                   <h3 className="font-bold text-theme-primary mb-2 text-lg">Customer Support</h3>
                   <p className="text-sm text-theme-secondary mb-2">support@freshcart.com</p>
-                  <p className="text-sm text-theme-secondary">+1 (800) 123-4567</p>
-              </div>
-              <div className="p-6 bg-theme-surface border border-theme rounded-2xl shadow-sm">
-                  <h3 className="font-bold text-theme-primary mb-2 text-lg">Headquarters</h3>
-                  <p className="text-sm text-theme-secondary leading-relaxed">
-                    5689 Wilson Rd<br/>
-                    Beverly Hills, 90210, USA
-                  </p>
               </div>
            </div>
         </div>
