@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-    <BrowserRouter basename="/Freshcart">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
 )
