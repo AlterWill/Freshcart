@@ -152,7 +152,7 @@ export const STATS = [
 export const TEAM_MEMBERS = [
     { id: 1, name: "Rishon K Roshan", role: "CEO & Founder" },
     { id: 2, name: "Rasya", role: "Head of Engineering" },
-    { id: 3, name: "Joel Dcunha", role: "Product Designer" },
+    { id: 3, name: "Not Joel Dcunha", role: "Product Designer/Bad Employee" },
     { id: 4, name: "John Paul Paret", role: "Marketing Lead" },
 ];
 
