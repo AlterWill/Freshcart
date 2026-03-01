@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# SmartMart - Online Grocery Delivery System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A production-ready full-stack web application replicating an Instamart/Blinkit style online supermarket. Built with React, Tailwind CSS, Node.js, Express, and MySQL. Suitable for DBMS academic projects.
 
-Currently, two official plugins are available:
+## Project Structure
+- `/client`: React Frontend (Vite + Tailwind CSS)
+- `/server`: Node.js + Express Backend
+- `schema.sql`: Complete MySQL database schema and sample data.
+- `API_DOCUMENTATION.md`: Detailed REST API endpoints.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
+- Node.js (v16+)
+- MySQL Server
 
-## React Compiler
+## Setup Instructions
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 1. Database Setup
+Ensure your MySQL server is running. Create the database and tables using the provided schema.
+```bash
+mysql -u root -p < schema.sql
+```
+*Note: This creates a `smartmart` DB and inserts an Admin user and a Test user.*
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Backend Setup
+Navigate to the server directory, install dependencies, and start the development server.
+```bash
+cd server
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Configure Environment Variables:
+Ensure `server/.env` is set correctly:
+```env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=smartmart
+JWT_SECRET=super_secret_jwt_key_smartmart
 ```
+
+Start Backend:
+```bash
+npm run dev
+```
+
+### 3. Frontend Setup
+Navigate to the client directory, install dependencies, and start the Vite dev server.
+```bash
+cd client
+npm install
+npm run dev
+```
+
+### 4. Access the App
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:5000`
+
+### Provided Test Accounts
+- **Admin**: `admin@smartmart.com` (Password: `password`)
+- **Customer**: `customer@smartmart.com` (Password: `password`)
+
+## Core Features Demonstrated
+1. **Frontend**: Custom Hooks, Context API (Auth & Cart), Tailwind CSS responsive design.
+2. **Backend**: Express Router, JWT Auth Middleware, Password Hashing.
+3. **Database**: Relational Database Design, SQL Transactions (Order processing + Stock reduction logic), Joins.
