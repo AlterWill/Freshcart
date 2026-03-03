@@ -265,7 +265,7 @@ const Checkout = () => {
                             {cartItems.map((item) => (
                                 <div key={item.id} className="flex justify-between text-sm py-2">
                                     <div className="flex-1 pr-4">
-                                        <p className="text-gray-900 font-medium truncate">{item.name}</p>
+                                        <p className="text-gray-900 font-medium">{item.name}</p>
                                         <p className="text-gray-500 text-xs mt-0.5">Qty: {item.quantity}</p>
                                     </div>
                                     <p className="font-medium text-gray-900 text-right whitespace-nowrap">

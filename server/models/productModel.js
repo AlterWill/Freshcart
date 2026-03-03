@@ -29,6 +29,8 @@ const Product = {
             queryStr += ' ORDER BY p.price ASC';
         } else if (sort === 'price_desc') {
             queryStr += ' ORDER BY p.price DESC';
+        } else if (sort === 'name_asc') {
+            queryStr += ' ORDER BY p.name ASC';
         } else {
             queryStr += ' ORDER BY p.created_at DESC';
         }
