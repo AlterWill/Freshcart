@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldAlert, TrendingUp, Package, Users, ShoppingCart, RefreshCw } from 'lucide-react';
+import { ShieldAlert, TrendingUp, Package, Users, ShoppingCart, RefreshCw, PackagePlus } from 'lucide-react';
 import api from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 
@@ -82,12 +82,20 @@ const AdminDashboard = () => {
                     </h1>
                     <p className="text-gray-500 mt-2 ml-1">Manage shop operations, inventory, and fulfillment.</p>
                 </div>
-                <button
-                    onClick={fetchDashboardData}
-                    className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors bg-white border border-gray-200 hover:border-indigo-300 px-4 py-2 rounded-lg shadow-sm"
-                >
-                    <RefreshCw className="w-4 h-4" /> Refresh Data
-                </button>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => navigate('/admin/add-product')}
+                        className="flex items-center gap-2 text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all px-6 py-2.5 rounded-lg shadow-md shadow-indigo-100"
+                    >
+                        <PackagePlus className="w-4 h-4" /> Create New Item
+                    </button>
+                    <button
+                        onClick={fetchDashboardData}
+                        className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors bg-white border border-gray-200 hover:border-indigo-300 px-4 py-2.5 rounded-lg shadow-sm"
+                    >
+                        <RefreshCw className="w-4 h-4" /> Refresh Data
+                    </button>
+                </div>
             </div>
 
             {/* Overview Stats Cards */}

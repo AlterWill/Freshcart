@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
+import AddProduct from './pages/AddProduct';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
@@ -26,6 +27,7 @@ function App() {
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/orders" element={<Orders />} />
                             <Route path="/admin" element={<AdminDashboard />} />
+                            <Route path="/admin/add-product" element={<AddProduct />} />
                         </Routes>
                     </main>
                 </div>

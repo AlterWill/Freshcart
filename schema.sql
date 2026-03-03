@@ -124,9 +124,20 @@ INSERT INTO products (id, name, price, stock, category_id, description, image_ur
 (2, 'Onions', 30.00, 150, 1, 'Farm fresh regular onions.', 'https://images.unsplash.com/photo-1620574387735-3624d75b2dbc?w=500&q=80'),
 (3, 'Amul Taaza Milk', 27.00, 50, 2, 'Toned milk, pasteurized.', 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80'),
 (4, 'FarmLite Bread', 45.00, 30, 2, 'Whole wheat brown bread.', 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?w=500&q=80'),
-(5, 'Lays Classic Salted', 20.00, 200, 3, 'Potato chips classic salted flavor.', 'https://images.unsplash.com/photo-1566478989037-eade3f7243e8?w=500&q=80'),
-(6, 'Coca Cola 1L', 60.00, 100, 4, 'Refreshing Cola drink.', 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&q=80')
-ON CONFLICT (id) DO NOTHING;
+(5, 'Lays Classic Salted', 20.00, 200, 3, 'Potato chips classic salted flavor.', 'https://images.unsplash.com/photo-1566478989037-eade3f7243e8?w=800&q=80'),
+(6, 'Coca Cola 1L', 60.00, 100, 4, 'Refreshing Cola drink.', 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&q=80'),
+(7, 'Organic Bananas', 60.00, 80, 1, 'Bunch of 6 ripe organic bananas.', 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=500&q=80'),
+(8, 'Greek Yogurt', 120.00, 40, 2, 'High protein plain greek yogurt.', 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500&q=80'),
+(9, 'Doritos Nacho Cheese', 35.00, 120, 3, 'Crunchy nacho cheese flavored chips.', 'https://images.unsplash.com/photo-1599490659223-9150c4468d62?w=500&q=80'),
+(10, 'Orange Juice 1L', 95.00, 60, 4, '100% pure squeezed orange juice.', 'https://images.unsplash.com/photo-1600271886311-dc543c5b965c?w=500&q=80'),
+(11, 'Red Apples', 180.00, 50, 1, 'Sweet and crunchy Washington apples (1kg).', 'https://images.unsplash.com/photo-1560806887-1e4cd0b6bcd6?w=500&q=80'),
+(12, 'Cheddar Cheese', 250.00, 25, 2, 'Aged sharp cheddar cheese block.', 'https://images.unsplash.com/photo-1618067424218-90f9b1248a4c?w=500&q=80')
+ON CONFLICT (id) DO UPDATE SET 
+    name = EXCLUDED.name,
+    price = EXCLUDED.price,
+    stock = EXCLUDED.stock,
+    description = EXCLUDED.description,
+    image_url = EXCLUDED.image_url;
 
 -- Reset sequence for products
 SELECT setval('products_id_seq', (SELECT MAX(id) FROM products));
