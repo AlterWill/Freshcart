@@ -131,7 +131,13 @@ INSERT INTO products (id, name, price, stock, category_id, description, image_ur
 (9, 'Doritos Nacho Cheese', 35.00, 120, 3, 'Crunchy nacho cheese flavored chips.', 'https://images.unsplash.com/photo-1599490659223-9150c4468d62?w=500&q=80'),
 (10, 'Orange Juice 1L', 95.00, 60, 4, '100% pure squeezed orange juice.', 'https://images.unsplash.com/photo-1600271886311-dc543c5b965c?w=500&q=80'),
 (11, 'Red Apples', 180.00, 50, 1, 'Sweet and crunchy Washington apples (1kg).', 'https://images.unsplash.com/photo-1560806887-1e4cd0b6bcd6?w=500&q=80'),
-(12, 'Cheddar Cheese', 250.00, 25, 2, 'Aged sharp cheddar cheese block.', 'https://images.unsplash.com/photo-1618067424218-90f9b1248a4c?w=500&q=80')
+(12, 'Cheddar Cheese', 250.00, 25, 2, 'Aged sharp cheddar cheese block.', 'https://images.unsplash.com/photo-1618067424218-90f9b1248a4c?w=500&q=80'),
+(13, 'Penne Pasta 500g', 85.00, 100, 3, 'Durum wheat semolina pasta.', 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&q=80'),
+(14, 'Nescafe Classic 100g', 320.00, 40, 4, 'Pure instant coffee.', 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&q=80'),
+(15, 'Free Range Eggs 12pk', 140.00, 30, 2, 'Farm fresh large brown eggs.', 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=500&q=80'),
+(16, 'Ferrero Rocher 16pk', 550.00, 20, 3, 'Crispy hazelnut milk chocolates.', 'https://images.unsplash.com/photo-1549007994-cb92ca067b0f?w=500&q=80'),
+(17, 'Avocado 2pk', 199.00, 15, 1, 'Ready to eat hass avocados.', 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=500&q=80'),
+(18, 'Sparkling Water 500ml', 45.00, 200, 4, 'Carbonated natural mineral water.', 'https://images.unsplash.com/photo-1551028150-64b9f398f678?w=500&q=80')
 ON CONFLICT (id) DO UPDATE SET 
     name = EXCLUDED.name,
     price = EXCLUDED.price,
