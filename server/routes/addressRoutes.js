@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getAddresses, addAddress, removeAddress } = require('../controllers/addressController');
+const getAddresses = require('../controllers/address/getUserAddresses');
+const addAddress = require('../controllers/address/addAddress');
+const removeAddress = require('../controllers/address/removeAddress');
 const { protect } = require('../middleware/authMiddleware');
 
 router.route('/')

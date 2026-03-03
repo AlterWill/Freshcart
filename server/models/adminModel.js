@@ -2,15 +2,15 @@ const db = require('../config/db');
 
 const Admin = {
     getDashboardStats: async () => {
-        const [[{ totalSales }]] = await db.query('SELECT SUM(total_amount) as totalSales FROM orders WHERE status = "Delivered"');
-        const [[{ totalOrders }]] = await db.query('SELECT COUNT(*) as totalOrders FROM orders');
-        const [[{ totalProducts }]] = await db.query('SELECT COUNT(*) as totalProducts FROM products');
+        const [salesRows] = await db.query('SELECT SUM(total_amount) as totalRevenue FROM orders WHERE status = $1', ['Delivered']);
+        const [orderRows] = await db.query('SELECT COUNT(*) as totalOrders FROM orders');
+        const [productRows] = await db.query('SELECT COUNT(*) as totalProducts FROM products');
         const [lowStockProducts] = await db.query('SELECT * FROM products WHERE stock < 10 ORDER BY stock ASC');
 
         return {
-            totalSales: totalSales || 0,
-            totalOrders: totalOrders || 0,
-            totalProducts: totalProducts || 0,
+            totalRevenue: salesRows[0].totalrevenue || 0, // PostgreSQL returns lowercase column names sometimes
+            totalOrders: parseInt(orderRows[0].totalorders) || 0,
+            totalProducts: parseInt(productRows[0].totalproducts) || 0,
             lowStockProducts
         };
     },
@@ -24,15 +24,15 @@ const Admin = {
         return orders;
     },
     updateOrderStatus: async (orderId, status) => {
-        await db.query('UPDATE orders SET status = ? WHERE id = ?', [status, orderId]);
+        await db.query('UPDATE orders SET status = $1 WHERE id = $2', [status, orderId]);
     },
     addProduct: async (productData) => {
         const { name, price, stock, category_id, description, image_url } = productData;
-        const [result] = await db.query(
-            'INSERT INTO products (name, price, stock, category_id, description, image_url) VALUES (?, ?, ?, ?, ?, ?)',
+        const [rows] = await db.query(
+            'INSERT INTO products (name, price, stock, category_id, description, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
             [name, price, stock, category_id, description, image_url]
         );
-        return result.insertId;
+        return rows[0].id;
     }
 };
 

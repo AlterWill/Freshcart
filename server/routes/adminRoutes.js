@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getDashboard, getOrders, updateOrder, createProduct } = require('../controllers/adminController');
+const getDashboard = require('../controllers/admin/getDashboardStats');
+const getOrders = require('../controllers/admin/getAllOrders');
+const updateOrder = require('../controllers/admin/updateOrderStatus');
+const createProduct = require('../controllers/admin/addProduct');
 const { protect, admin } = require('../middleware/authMiddleware');
 
 router.use(protect, admin); // Apply to all admin routes

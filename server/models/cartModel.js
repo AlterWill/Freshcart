@@ -2,39 +2,39 @@ const db = require('../config/db');
 
 const Cart = {
     getOrCreateCart: async (userId) => {
-        let [rows] = await db.query('SELECT * FROM cart WHERE user_id = ?', [userId]);
+        let [rows] = await db.query('SELECT * FROM cart WHERE user_id = $1', [userId]);
         if (rows.length === 0) {
-            const [result] = await db.query('INSERT INTO cart (user_id) VALUES (?)', [userId]);
-            return { id: result.insertId, user_id: userId };
+            const [insertRows] = await db.query('INSERT INTO cart (user_id) VALUES ($1) RETURNING id', [userId]);
+            return { id: insertRows[0].id, user_id: userId };
         }
         return rows[0];
     },
     getItems: async (cartId) => {
         const [rows] = await db.query(`
-            SELECT ci.id as cart_item_id, ci.quantity, p.* 
+            SELECT ci.id, ci.quantity, p.id as product_id, p.name, p.price, p.stock, p.image_url, p.description
             FROM cart_items ci 
             JOIN products p ON ci.product_id = p.id 
-            WHERE ci.cart_id = ?
+            WHERE ci.cart_id = $1
         `, [cartId]);
         return rows;
     },
     addItem: async (cartId, productId, quantity) => {
-        const [existing] = await db.query('SELECT * FROM cart_items WHERE cart_id = ? AND product_id = ?', [cartId, productId]);
+        const [existing] = await db.query('SELECT * FROM cart_items WHERE cart_id = $1 AND product_id = $2', [cartId, productId]);
         if (existing.length > 0) {
             const newQuantity = existing[0].quantity + quantity;
-            await db.query('UPDATE cart_items SET quantity = ? WHERE id = ?', [newQuantity, existing[0].id]);
+            await db.query('UPDATE cart_items SET quantity = $1 WHERE id = $2', [newQuantity, existing[0].id]);
         } else {
-            await db.query('INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (?, ?, ?)', [cartId, productId, quantity]);
+            await db.query('INSERT INTO cart_items (cart_id, product_id, quantity) VALUES ($1, $2, $3)', [cartId, productId, quantity]);
         }
     },
     updateItemQuantity: async (cartItemId, quantity) => {
-        await db.query('UPDATE cart_items SET quantity = ? WHERE id = ?', [quantity, cartItemId]);
+        await db.query('UPDATE cart_items SET quantity = $1 WHERE id = $2', [quantity, cartItemId]);
     },
     removeItem: async (cartItemId) => {
-        await db.query('DELETE FROM cart_items WHERE id = ?', [cartItemId]);
+        await db.query('DELETE FROM cart_items WHERE id = $1', [cartItemId]);
     },
     clearCart: async (cartId) => {
-        await db.query('DELETE FROM cart_items WHERE cart_id = ?', [cartId]);
+        await db.query('DELETE FROM cart_items WHERE cart_id = $1', [cartId]);
     }
 };
 
