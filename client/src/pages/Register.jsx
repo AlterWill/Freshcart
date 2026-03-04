@@ -18,7 +18,7 @@ const Register = () => {
         setIsLoading(true);
         setError('');
         try {
-            await register(name, email, password);
+            await register(name.trim(), email.trim(), password);
             navigate('/');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');

@@ -17,7 +17,7 @@ const Login = () => {
         setIsLoading(true);
         setError('');
         try {
-            await login(email, password);
+            await login(email.trim(), password);
             navigate('/');
         } catch (err) {
             setError(err.response?.data?.message || 'Invalid email or password');
