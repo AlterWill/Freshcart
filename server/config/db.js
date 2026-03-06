@@ -6,44 +6,52 @@ let pool;
 let query;
 let getConnection;
 
-if (process.env.DATABASE_URL) {
-    // Neon Serverless Connection
-    const sql = neon(process.env.DATABASE_URL);
+// Prefer POSTGRES_URL (Vercel standard) or DATABASE_URL (Generic standard)
+const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+
+if (connectionString) {
+    console.log('Using remote database connection');
+    
+    // Check if we should use the serverless driver (HTTP) or standard pool (TCP)
+    // For Vercel Serverless Functions, @neondatabase/serverless is often better for cold starts
+    // But for full compatibility with existing transaction logic, standard pg with SSL is safer if not using WebSocket.
+    // The user installed @neondatabase/serverless, so we use it for queries.
+    
+    const sql = neon(connectionString);
 
     query = async (text, params) => {
+        // console.log('Executing query:', text);
         const start = Date.now();
-        // neon() returns a simple array of results, but our app expects [rows, resultObj]
-        // We mock the resultObj to minimize changes in the rest of the app
-        const rows = await sql(text, params);
-        const duration = Date.now() - start;
-        return [rows, { rowCount: rows.length }];
+        try {
+            const rows = await sql(text, params);
+            const duration = Date.now() - start;
+            return [rows, { rowCount: rows.length }];
+        } catch (err) {
+            console.error('Database Query Error:', err);
+            throw err;
+        }
     };
 
-    // For transactions in Neon serverless (HTTP), we can't use standard BEGIN/COMMIT with the lightweight driver easily
-    // unless we use the full driver or WebSocket. 
-    // However, for compatibility with the existing codebase which expects a client-like object:
+    // Compatibility layer for transactions
     getConnection = async () => {
-        // Warning: The lightweight neon http driver doesn't support interactive transactions (BEGIN...COMMIT) 
-        // in the same way a persistent TCP connection does. 
-        // For strict transaction support with Neon on Vercel, usage of 'pg' with SSL or '@neondatabase/serverless' 
-        // in full driver mode is recommended. 
-        // But since we want to "make it work" with the provided guide's style:
-        
         const client = {
             query: async (text, params) => {
                 const rows = await sql(text, params);
                 return [rows, { rowCount: rows.length }];
             },
-            beginTransaction: async () => { /* No-op for HTTP stateless or handled differently */ },
-            commit: async () => { /* No-op */ },
-            rollback: async () => { /* No-op */ },
-            release: () => { /* No-op */ }
+            // HTTP driver doesn't support interactive transactions.
+            // These are no-ops to prevent crashes, but strict transactional integrity is not guaranteed in this mode.
+            beginTransaction: async () => { },
+            commit: async () => { },
+            rollback: async () => { },
+            release: () => { }
         };
         return client;
     };
 
 } else {
-    // Local Development / Standard Postgres Connection
+    console.log('Using local database connection');
+    // Local Development
     pool = new Pool({
         host: process.env.DB_HOST || 'localhost',
         user: process.env.DB_USER || 'postgres',
