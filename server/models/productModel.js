@@ -5,7 +5,14 @@ const Product = {
         const { keyword, category, sort, page = 1, limit = 10 } = params;
         const offset = (page - 1) * limit;
         
-        let queryStr = 'SELECT p.*, c.name as category_name FROM products p JOIN categories c ON p.category_id = c.id WHERE 1=1';
+        // Use explicit columns instead of p.* for better compatibility with Neon driver
+        let queryStr = `
+            SELECT p.id, p.name, p.price, p.stock, p.category_id, p.description, p.image_url, p.created_at, 
+                   c.name as category_name 
+            FROM products p 
+            JOIN categories c ON p.category_id = c.id 
+            WHERE 1=1
+        `;
         let countQuery = 'SELECT COUNT(*) as total FROM products p JOIN categories c ON p.category_id = c.id WHERE 1=1';
         let queryParams = [];
         let paramIndex = 1;
