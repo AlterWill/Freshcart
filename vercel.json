@@ -1,8 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
   "builds": [
     {
-      "src": "package.json",
+      "src": "server/server.js",
       "use": "@vercel/node"
     }
   ],
@@ -14,10 +15,6 @@
     {
       "src": "/assets/(.*)",
       "dest": "/client/dist/assets/$1"
-    },
-    {
-      "src": "/vite.svg",
-      "dest": "/client/dist/vite.svg"
     },
     {
       "src": "/(.*)",
