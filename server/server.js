@@ -55,6 +55,16 @@ app.get("/api", (req, res) => {
   res.json({ message: "Welcome to SmartMart API" });
 });
 
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("Global Error Handler:", err.stack);
+  res.status(500).json({ 
+    message: 'Internal Server Error', 
+    error: err.message,
+    path: req.path
+  });
+});
+
 // Start Server (only if not loaded as a module by Vercel)
 if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => {

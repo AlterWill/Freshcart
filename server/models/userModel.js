@@ -15,6 +15,9 @@ const User = {
             'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id',
             [name, email, password, role || 'customer']
         );
+        if (!rows || rows.length === 0) {
+            throw new Error('User creation failed: No data returned from database');
+        }
         return rows[0].id;
     }
 };
