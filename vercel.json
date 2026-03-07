@@ -1,7 +1,6 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "client/dist",
   "env": {
     "POSTGRES_URL": "@POSTGRES_URL",
     "NODE_ENV": "production"
@@ -12,8 +11,13 @@
       "destination": "/api/index.js"
     },
     {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "source": "/(.*)",
+      "destination": "/client/dist/$1",
+      "check": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/client/dist/index.html"
     }
   ]
 }

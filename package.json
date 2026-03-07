@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Online grocery delivery system",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd .. && cp -r public/* client/dist/ 2>/dev/null || true && cd server && npm install",
-    "start": "cd server && npm start",
-    "dev": "cd server && npm run dev"
+    "build": "cd client && npm install && npm run build && cd .. && cp -r public/* client/dist/ 2>/dev/null || true",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
@@ -18,5 +18,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
