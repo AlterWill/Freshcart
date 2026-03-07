@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "cd client && npm install && npm run build",
+  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "server/package.json",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["server/**", "client/dist/**"],
-        "excludeFiles": ["client/src/**", "client/node_modules/**"]
+        "includeFiles": ["server/**", "client/dist/**"]
       }
     }
   ],
