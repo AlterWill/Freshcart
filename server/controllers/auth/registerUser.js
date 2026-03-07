@@ -1,6 +1,7 @@
 const User = require('../../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const db = require('../../config/db');
 
 const generateToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.JWT_SECRET, {
@@ -14,6 +15,14 @@ const registerUser = async (req, res) => {
 
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Please provide all fields' });
+        }
+
+        // Test database connectivity
+        try {
+            await db.query('SELECT 1');
+        } catch (dbErr) {
+            console.error('Database connection test failed in Register:', dbErr.message);
+            return res.status(500).json({ message: 'Database connection failed', error: dbErr.message });
         }
 
         const userExists = await User.findByEmail(email);
