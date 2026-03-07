@@ -25,8 +25,11 @@ if (connectionString && typeof connectionString === 'string' && connectionString
 
         query = async (text, params) => {
             try {
-                const rows = await sql.query(text, params);
-                return [rows, { rowCount: rows.length }];
+                const res = await sql.query(text, params);
+                // The Neon driver might return the rows directly or a result object
+                // We ensure we return [rows, metadata] for compatibility
+                const rows = Array.isArray(res) ? res : (res.rows || []);
+                return [rows, res];
             } catch (err) {
                 console.error('DATABASE_QUERY_ERROR:', err.message);
                 throw err;
@@ -37,8 +40,9 @@ if (connectionString && typeof connectionString === 'string' && connectionString
         getConnection = async () => {
             return {
                 query: async (text, params) => {
-                    const rows = await sql.query(text, params);
-                    return [rows, { rowCount: rows.length }];
+                    const res = await sql.query(text, params);
+                    const rows = Array.isArray(res) ? res : (res.rows || []);
+                    return [rows, res];
                 },
                 beginTransaction: async () => { /* No-op for HTTP */ },
                 commit: async () => { /* No-op */ },
