@@ -31,6 +31,11 @@ const registerUser = async (req, res) => {
             role: 'customer'
         });
 
+        if (!process.env.JWT_SECRET) {
+            console.error('JWT_SECRET is missing from environment variables');
+            return res.status(500).json({ message: 'Server configuration error: JWT_SECRET missing' });
+        }
+
         res.status(201).json({
             id: userId,
             name,
