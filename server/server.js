@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -42,7 +43,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const healthRoutes = require("./routes/healthRoutes");
 
-// Routes
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/addresses", addressRoutes);
 app.use("/api/products", productRoutes);
@@ -54,6 +55,17 @@ app.use("/api/health", healthRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to SmartMart API" });
 });
+
+// Serve static frontend files in production
+if (process.env.NODE_ENV === "production") {
+  const clientPath = path.join(__dirname, "../client/dist");
+  app.use(express.static(clientPath));
+  
+  // Handle SPA routing - serve index.html for all non-API routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientPath, "index.html"));
+  });
+}
 
 // Start Server (only if not loaded as a module by Vercel)
 if (process.env.NODE_ENV !== "production") {
