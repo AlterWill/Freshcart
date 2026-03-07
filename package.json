@@ -3,9 +3,18 @@
   "version": "1.0.0",
   "description": "Online grocery delivery system",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "build": "cd client && npm install && npm run build && cd .. && cp -r public/* client/dist/ 2>/dev/null || true && cd server && npm install",
     "start": "cd server && npm start",
     "dev": "cd server && npm run dev"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.19.0"
   },
   "keywords": [],
   "author": "",
