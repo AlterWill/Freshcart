@@ -25,7 +25,7 @@ if (connectionString && typeof connectionString === 'string' && connectionString
 
         query = async (text, params) => {
             try {
-                const rows = await sql(text, params);
+                const rows = await sql.query(text, params);
                 return [rows, { rowCount: rows.length }];
             } catch (err) {
                 console.error('DATABASE_QUERY_ERROR:', err.message);
@@ -37,7 +37,7 @@ if (connectionString && typeof connectionString === 'string' && connectionString
         getConnection = async () => {
             return {
                 query: async (text, params) => {
-                    const rows = await sql(text, params);
+                    const rows = await sql.query(text, params);
                     return [rows, { rowCount: rows.length }];
                 },
                 beginTransaction: async () => { /* No-op for HTTP */ },
