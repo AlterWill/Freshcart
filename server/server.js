@@ -40,6 +40,7 @@ const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const healthRoutes = require("./routes/healthRoutes");
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -48,6 +49,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/health", healthRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to SmartMart API" });

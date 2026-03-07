@@ -36,44 +36,65 @@ SmartMart is a production-ready, full-stack web application replicating an Insta
 
 ---
 
-## 🛠 Local Setup Instructions (Arch Linux)
+## 🛠 Setup Instructions
 
-### 1. Prerequisites
-Ensure you have Node.js and PostgreSQL installed:
-```bash
-sudo pacman -S nodejs npm postgresql
-```
+For **complete detailed setup** with troubleshooting, see [SETUP.md](./SETUP.md)
 
-### 2. Database Setup
-Start your PostgreSQL service and initialize it if you haven't:
-```bash
-sudo systemctl start postgresql
-# If first time: sudo -u postgres initdb -D /var/lib/postgres/data
-```
+### Quick Start (Local Development)
 
-Create the database and apply the schema:
+#### Prerequisites
+- Node.js (v14+) and npm/pnpm
+- PostgreSQL installed and running
+
+#### 1. Database Setup
 ```bash
-sudo -u postgres psql -c "CREATE DATABASE smartmart;"
+# Create database
+sudo -u postgres createdb smartmart
+
+# Load schema
 sudo -u postgres psql -d smartmart < schema.sql
 ```
 
-### 3. Backend Setup
-Navigate to the server directory, install dependencies, and start the API:
+#### 2. Configure Environment
+Create `.env` in the project root:
+```bash
+DB_HOST=localhost
+DB_USER=postgres
+DB_NAME=smartmart
+DB_PORT=5432
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
+```
+
+#### 3. Backend Setup
 ```bash
 cd server
 npm install
-npm run dev
+npm run dev  # Runs on http://localhost:5000
 ```
-*The API will run on `http://localhost:5000`*
 
-### 4. Frontend Setup
-Navigate to the client directory, install dependencies, and start Vite:
+#### 4. Frontend Setup
 ```bash
 cd client
 npm install
-npm run dev
+npm run dev  # Runs on http://localhost:5173
 ```
-*The site will run on `http://localhost:5173`*
+
+#### 5. Verify Setup
+```bash
+# Test API health
+curl http://localhost:5000/api/health
+```
+
+### Production Deployment
+
+For **Vercel + Neon.tech** deployment, see [SETUP.md - Production Deployment Setup](./SETUP.md#production-deployment-setup)
+
+**Quick summary:**
+1. Create Neon.tech account and database
+2. Add `POSTGRES_URL` to Vercel environment variables
+3. Load schema into Neon database
+4. Deploy to Vercel
 
 ---
 
