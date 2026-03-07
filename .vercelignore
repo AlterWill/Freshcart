@@ -1,0 +1,8 @@
+# Don't ignore the built client
+!client/dist
+
+# Ignore unnecessary files
+node_modules
+.git
+.env.local
+*.log
