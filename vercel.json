@@ -1,23 +1,15 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "env": {
-    "POSTGRES_URL": "@POSTGRES_URL",
-    "NODE_ENV": "production"
-  },
+  "outputDirectory": "client/dist",
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api/index.js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/client/dist/$1",
-      "check": true
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/dist/index.html"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
