@@ -4,16 +4,21 @@
   "builds": [
     {
       "src": "server/package.json",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["server/**", "client/dist/**"]
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "server/server.js"
+    },
+    {
+      "src": "/",
+      "dest": "client/dist/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/dist/$1"
     }
   ]
 }

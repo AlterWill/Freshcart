@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -43,7 +42,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const healthRoutes = require("./routes/healthRoutes");
 
-// API Routes (must be before static files for priority)
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/addresses", addressRoutes);
 app.use("/api/products", productRoutes);
@@ -53,32 +52,6 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/health", healthRoutes);
 
 app.get("/api", (req, res) => {
-  res.json({ message: "Welcome to SmartMart API" });
-});
-
-// Serve static frontend files in production
-const clientDistPath = path.join(__dirname, "../client/dist");
-console.log(`[Server] Production mode: ${process.env.NODE_ENV === "production"}`);
-console.log(`[Server] Client dist path: ${clientDistPath}`);
-
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from client/dist
-  app.use(express.static(clientDistPath));
-  
-  // Handle SPA routing - serve index.html for all non-API routes
-  app.get("*", (req, res) => {
-    const indexPath = path.join(clientDistPath, "index.html");
-    res.sendFile(indexPath, (err) => {
-      if (err) {
-        console.error(`[Server] Error serving index.html:`, err);
-        res.status(404).json({ error: "Frontend not found" });
-      }
-    });
-  });
-}
-
-// Root endpoint for non-production
-app.get("/", (req, res) => {
   res.json({ message: "Welcome to SmartMart API" });
 });
 
