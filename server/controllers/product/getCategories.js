@@ -5,8 +5,11 @@ const getCategories = async (req, res) => {
         const categories = await Category.getAll();
         res.json(categories);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server Error' });
+        console.error("GetCategories Error:", error);
+        res.status(500).json({ 
+            message: 'Server Error', 
+            error: error.message 
+        });
     }
 };
 

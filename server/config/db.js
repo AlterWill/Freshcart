@@ -11,9 +11,12 @@ let connectionMode = '';
 const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
 
 if (connectionString && typeof connectionString === 'string' && connectionString.trim().length > 0) {
+    console.log('Database connection string detected.');
     try {
-        // Validate URL format
-        new URL(connectionString);
+        // Simple validation
+        if (!connectionString.startsWith('postgres://') && !connectionString.startsWith('postgresql://')) {
+            throw new Error('Invalid connection string format. Must start with postgres:// or postgresql://');
+        }
         
         // Attempt to use Neon Serverless Driver
         console.log('Attempting to connect via Neon Serverless Driver...');
@@ -21,13 +24,11 @@ if (connectionString && typeof connectionString === 'string' && connectionString
         connectionMode = 'remote (Neon HTTP)';
 
         query = async (text, params) => {
-            const start = Date.now();
             try {
                 const rows = await sql(text, params);
-                // console.log(`Query executed in ${Date.now() - start}ms: ${text.substring(0, 50)}...`);
                 return [rows, { rowCount: rows.length }];
             } catch (err) {
-                console.error('Neon Driver Query Error:', err);
+                console.error('DATABASE_QUERY_ERROR:', err.message);
                 throw err;
             }
         };
