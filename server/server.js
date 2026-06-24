@@ -5,7 +5,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware1
 app.use(cors()); // Allow all origins in production for now to fix connection issues
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
